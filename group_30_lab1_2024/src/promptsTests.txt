@@ -1,0 +1,140 @@
+--------------------------- Dibujo.hs Prompts ----------------------------------------
+:l src/Dibujo.hs
+
+:t (Rot45 (Rotar Borrar))
+(Rot45 (Rotar Borrar)) :: Dibujo a
+
+:t (Rot45 (Rotar (Figura Triangulo)))
+(Rot45 (Rotar (Figura Triangulo))) :: Dibujo Figura
+
+:t mapDib (rotar) (Rot45 (Rotar (Figura Triangulo)))
+
+<interactive>:1:17: error:
+    • Couldn't match type ‘Figura’ with ‘Dibujo a’
+      Expected type: Dibujo (Dibujo a)
+        Actual type: Dibujo Figura
+    • In the second argument of ‘mapDib’, namely
+        ‘(Rot45 (Rotar (Figura Triangulo)))’
+      In the expression:
+        mapDib (rotar) (Rot45 (Rotar (Figura Triangulo)))
+
+mapDib (rotar) (Rotar Figura Triangulo)
+
+<interactive>:11:17: error:
+    • Couldn't match expected type ‘Figura -> Dibujo (Dibujo a)’
+                  with actual type ‘Dibujo a1’
+    • The function ‘Rotar’ is applied to two arguments,
+      but its type ‘Dibujo a1 -> Dibujo a1’ has only one
+      In the second argument of ‘mapDib’, namely
+        ‘(Rotar Figura Triangulo)’
+      In the expression: mapDib (rotar) (Rotar Figura Triangulo)
+    • Relevant bindings include
+        it :: Dibujo (Dibujo a) (bound at <interactive>:11:1)
+
+<interactive>:11:23: error:
+    • Couldn't match expected type ‘Dibujo a1’
+                  with actual type ‘a0 -> Dibujo a0’
+    • Probable cause: ‘Figura’ is applied to too few arguments
+      In the first argument of ‘Rotar’, namely ‘Figura’
+      In the second argument of ‘mapDib’, namely
+        ‘(Rotar Figura Triangulo)’
+      In the expression: mapDib (rotar) (Rotar Figura Triangulo)
+
+mapDib (rotar) (Rot45 (Rotar (Borrar)))
+Rot45 (Rotar Borrar)
+
+mapDib (espejar) (Rot45 (Rotar (Borrar)))
+
+figura (Figura Triangulo)
+Figura (Figura Triangulo)
+
+:t Figura (Figura Triangulo)
+Figura (Figura Triangulo) :: Dibujo (Dibujo Figura)
+
+mapDib espejar (Rot45 (Rotar (figura (Figura Triangulo))))
+Rot45 (Rotar (Figura (Espejar (Figura Triangulo))))
+
+:t Rotar (Figura Triangulo)
+Rotar (Figura Triangulo) :: Dibujo Figura
+
+Encimar (Rotar (Figura Triangulo)) (Apilar 1.0 1.0 (Figura Rectangulo) (Juntar 2.0 1.0 (Figura Triangulo) (Figura Rectangulo)))
+
+:t Encimar (Rotar (Figura (Figura Triangulo))) (Apilar 1.0 1.0 (Figura (Figura Rectangulo)) (Juntar 2.0 1.0 (Figura (Figura Triangulo)) (Figura (Figura Rectangulo))))
+Encimar (Rotar (Figura (Figura Triangulo))) (Apilar 1.0 1.0 (Figura (Figura Rectangulo)) (Juntar 2.0 1.0 (Figura (Figura Triangulo)) (Figura (Figura Rectangulo))))
+  :: Dibujo (Dibujo Figura)
+
+mapDib id (Encimar (Rotar (Figura (Figura Triangulo))) (Apilar 1.0 1.0 (Figura (Figura Rectangulo)) (Juntar 2.0 1.0 (Figura (Figura Triangulo)) (Figura (Figura Rectangulo)))))
+
+mapDib show (Encimar (Rotar (Figura (Figura Triangulo))) (Apilar 1.0 1.0 (Figura (Figura Rectangulo)) (Juntar 2.0 1.0 (Figura (Figura Triangulo)) (Figura (Figura Rectangulo)))))
+Encimar (Rotar (Figura "Figura Triangulo")) (Apilar 1.0 1.0 (Figura "Figura Rectangulo") (Juntar 2.0 1.0 (Figura "Figura Triangulo") (Figura "Figura Rectangulo")))
+
+mapDib espejar (Encimar (Rotar (Figura (Figura Triangulo))) (Apilar 1.0 1.0 (Figura (Figura Rectangulo)) (Juntar 2.0 1.0 (Figura (Figura Triangulo)) (Figura (Figura Rectangulo)))))
+Encimar (Rotar (Figura (Espejar (Figura Triangulo)))) (Apilar 1.0 1.0 (Figura (Espejar (Figura Rectangulo))) (Juntar 2.0 1.0 (Figura (Espejar (Figura Triangulo))) (Figura (Espejar (Figura Rectangulo)))))
+
+*Dibujo> mapDib espejar (Figura (Figura Triangulo))
+Figura (Espejar (Figura Triangulo))
+*Dibujo> :t Figura (Espejar (Figura Triangulo))
+Figura (Espejar (Figura Triangulo)) :: Dibujo (Dibujo Figura)
+*Dibujo> 
+
+figura (Encimar (Rotar (Figura (Espejar (Figura Triangulo)))) (Apilar 1.0 1.0 (Figura (Espejar (Figura Rectangulo))) (Juntar 2.0 1.0 (Figura (Espejar (Figura Triangulo))) (Figura (Espejar (Figura Rectangulo))))))
+Figura (Encimar (Rotar (Figura (Espejar (Figura Triangulo)))) (Apilar 1.0 1.0 (Figura (Espejar (Figura Rectangulo))) (Juntar 2.0 1.0 (Figura (Espejar (Figura Triangulo))) (Figura (Espejar (Figura Rectangulo))))))
+
+change rotar (Encimar (Rotar (Figura (Espejar (Figura Triangulo)))) (Apilar 1.0 1.0 (Figura (Espejar (Figur
+a Rectangulo))) (Juntar 2.0 1.0 (Figura (Espejar (Figura Triangulo))) (Figura (Espejar (Figura Rectangulo))))))
+Encimar (Rotar (Rotar (Espejar (Figura Triangulo)))) (Apilar 1.0 1.0 (Rotar (Espejar (Figura Rectangulo))) (Juntar 2.0 1.0 (Rotar (Espejar (Figura Triangulo))) (Rotar (Espejar (Figura Rectangulo)))))
+
+// Ejemplo que rompe nuestro mapDib
+mapDib espejar (Rot45 (Rotar (Figura (Rot45 (Figura Triangulo)))))
+Rot45 (Rotar (Figura (Espejar (Rot45 (Figura Triangulo)))))
+
+change exampleChangeFunc (Encimar (Rotar (Figura (Figura Triangulo))) (Apilar 1.0 1.0 (Figura (Figura Rectangulo)) (Juntar 2.0 1.0 (Figura (Figura Triangulo)) (Figura (Figura Rectangulo)))))
+Encimar (Rotar (Rotar (Figura (Figura Triangulo)))) (Apilar 1.0 1.0 (Rotar (Figura (Figura Rectangulo))) (Juntar 2.0 1.0 (Rotar (Figura (Figura Triangulo))) (Rotar (Figura (Figura Rectangulo)))))
+
+change espejar (Encimar (Rotar (Figura (Figura Triangulo))) (Apilar 1.0 1.0 (Figura (Figura Rectangulo)) (Juntar 2.0 1.0 (Figura (Figura Triangulo)) (Figura (Figura Rectangulo)))))
+Encimar (Rotar (Espejar (Figura Triangulo))) (Apilar 1.0 1.0 (Espejar (Figura Rectangulo)) (Juntar 2.0 1.0 (Espejar (Figura Triangulo)) (Espejar (Figura Rectangulo))))
+
+change exampleChangeFunc (Encimar (Rotar (Figura Triangulo)) (Apilar 1.0 1.0 (Figura Rectangulo) (Juntar 2.0 1.0 (Figura Triangulo) (Figura Rectangulo))))
+Encimar (Rotar (Rotar (Figura Triangulo))) (Apilar 1.0 1.0 (Rotar (Figura Rectangulo)) (Juntar 2.0 1.0 (Rotar (Figura Triangulo)) (Rotar (Figura Rectangulo))))
+
+change rotar (Encimar (Rotar (Figura (Espejar (Figura Triangulo)))) (Apilar 1.0 1.0 (Figura (Espejar (Figura Rectangulo))) (Juntar 2.0 1.0 (Figura (Espejar (Figura Triangulo))) (Figura (Espejar (Figura Rectangulo))))))
+
+--------------------------- Pred.hs Prompts --------------------------------
+:l src/Pred.hs src/Dibujo.hs
+
+cambiar (== "Trio") exampleChangeFunc (encimar (rotar (figura "Trio")) (apilar 1.0 1.0 (figura "Rect") (juntar 2.0 1.0 (figura "Trio") (figura "Rect"))))
+Encimar (Rotar (Rotar (Figura "Trio"))) (Apilar 1.0 1.0 (Figura "Rect") (Juntar 2.0 1.0 (Rotar (Figura "Trio")) (Figura "Rect")))
+
+// Cambiar hecho con foldDib
+cambiar (== Rectangulo) exampleChangeFunc (encimar (rotar (figura Triangulo)) (apilar 1.0 1.0 (figura Rectangulo) (juntar 2.0 1.0 (figura Triangulo) (figura Rectangulo))))
+Encimar (Rotar (Figura Triangulo)) (Apilar 1.0 1.0 (Rotar (Figura Rectangulo)) (Juntar 2.0 1.0 (Figura Triangulo) (Rotar (Figura Rectangulo))))
+
+// Cambiar ahora esta hecho con change
+cambiar (== Rectangulo) exampleChangeFunc (encimar (rotar (figura Triangulo)) (apilar 1.0 1.0 (figura Rectangulo) (juntar 2.0 1.0 (figura Triangulo) (figura Rectangulo))))
+Encimar (Rotar (Figura Triangulo)) (Apilar 1.0 1.0 (Rotar (Figura Rectangulo)) (Juntar 2.0 1.0 (Figura Triangulo) (Rotar (Figura Rectangulo))))
+
+cambiar (== Rectangulo) exampleChangeFunc2 (encimar (rotar (figura Triangulo)) (apilar 1.0 1.0 (figura Rectangulo) (juntar 2.0 1.0 (figura Triangulo) (figura Rectangulo))))
+Encimar (Rotar (Figura Triangulo)) (Apilar 1.0 1.0 (Figura Triangulo) (Juntar 2.0 1.0 (Figura Triangulo) (Figura Triangulo)))
+
+anyDib (==Rectangulo) (encimar (rotar (figura Triangulo)) (apilar 1.0 1.0 (figura Rectangulo) (juntar 2.0 1.0 (figura Triangulo) (figura Rectangulo))))
+True
+*Pred> anyDib (==Rectangulo) (encimar (rotar (figura Triangulo)) (apilar 1.0 1.0 (figura Triangulo) (juntar 2.0 1.0 (figura Triangulo) (figura Triangulo))))
+False
+
+allDib (==Rectangulo) (encimar (rotar (figura Triangulo)) (apilar 1.0 1.0 (figura Rectangulo) (juntar 2.0 1.0 (figura Triangulo) (figura Rectangulo))))
+False
+*Pred> allDib (==Rectangulo) (encimar (rotar (figura Triangulo)) (apilar 1.0 1.0 (figura Triangulo) (juntar 2.0 1.0 (figura Triangulo) (figura Triangulo))))
+False
+*Pred> allDib (==Triangulo) (encimar (rotar (figura Triangulo)) (apilar 1.0 1.0 (figura Triangulo) (juntar 2.0 1.0 (figura Triangulo) (figura Triangulo))))
+True
+
+-------------------------------------- Feo.hs --------------------------------------
+:l src/Dibujos/Feo.hs src/Dibujo.hs src/FloatingPic.hs 
+------------------------------------- Interp.hs Prompts ---------------------------
+
+
+Compilar lab 17
+
+:l Main.hs
+:set args "nombre del dibujo"
+main
